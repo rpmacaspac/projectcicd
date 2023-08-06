@@ -1,59 +1,49 @@
-def workdir = "/home/ireborn/workspaces"
-
 pipeline {
-    agent {
-        kubernetes {
-            yaml '''
-                apiVersion: v1
-                kind: Pod
-                metadata:
-                labels:
-                  app: jenkins-slave
-                spec:
-                containers:
-                - name: kaniko
-                    image: gcr.io/kaniko-project/executor:debug
-                    volumeMounts:
-                        - name: kaniko-secret
-                          mountPath: /kaniko/.docker
-                restartPolicy: Never
-                volumes:
-                - name: kaniko-secret
-                    secret:
-                        secretName: regcred
-                        items:
-                            - key: .dockerconfigjson
-                              path: config.json
-                '''
-        } 
+
+  environment {
+    dockerimagename = "rpmacaspac/projectcicd"
+    dockerImage = ""
+  }
+
+  agent any
+
+  stages {
+
+    stage('Checkout Source') {
+      steps {
+        git 'https://github.com/rpmacaspac/projectcicd.git'
+      }
     }
 
-    stages {
-        stage('Info') {
-            steps {
-                script {
-                    BUILD_VERSION = sh (
-                        sript: "cat ${projectDir}/build_number.txt",
-                        returnStdout: true
-                    ).trim()
-                }
-
-
-            echo 'Build version ' + BUILD_VERSION
-            }
+    stage('Build image') {
+      steps{
+        script {
+          dockerImage = docker.build dockerimagename
         }
+      }
+    }
 
-        stage('Build'){
-            steps {
-                script {
-                    sh """/kaniko/executor \
-                            --dockerfile "${workdir}/Dockerfile" \
-                            --context "git://github.com/rpmacaspac/projectcicd" \
-                            --destination "ireborn:34189/harbor/projects:${BUILD_VERSION}"
-                            """
-                    } //container
-                } //steps
-            } //stage(build
+    stage('Pushing Image') {
+      environment {
+               registryCredential = 'dockerhublogin'
+           }
+      steps{
+        script {
+          docker.withRegistry( 'https://registry.hub.docker.com', registryCredential ) {
+            dockerImage.push("latest")
+          }
         }
+      }
+    }
+
+    stage('Deploying App to Kubernetes') {
+      steps {
+        script {
+          kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
+        }
+      }
+    }
+
+  }
 
 }
