@@ -17,7 +17,7 @@ spec:
         app: myapp 
     spec:
       containers:
-      - name: nodeserver
+      - name: myserver
         image: rpmacaspac/projectcicd:latest
         ports:
         - containerPort: 3000
