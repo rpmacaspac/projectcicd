@@ -20,10 +20,12 @@ pipeline {
 
     stage('Build image') {
       steps{
-        script {
-            def imageName = 'my-app:latest'
-            def dockerFile = "${projectDir}/Dockerfile"
-            dockerImage = docker.build(dockerImageName, "-f ${dockerFile} .")
+        container('docker'){
+          script {
+              def imageName = 'my-app:latest'
+              def dockerFile = "${projectDir}/Dockerfile"
+              dockerImage = docker.build(dockerImageName, "-f ${dockerFile} .")
+          }
         }
       }
     }
