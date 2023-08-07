@@ -8,7 +8,12 @@ pipeline {
     projectDir = "workspaces/"
   }
 
-  agent any
+  agent {
+    kubernetes {
+        defaultContainer 'jnlp'
+        yamlFile 'workspaces/agentpod.yaml'
+    }
+}
 
   stages {
 
