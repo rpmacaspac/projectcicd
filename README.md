@@ -1,5 +1,7 @@
 # projectcicd
-Project cicd will test jenkins pipeline that will create workloads for our simple application. Simple "hello world" program written in Python will be deployed in a container once it pass the test and security checks.
+projectcicd motivation is to create a pipeline that will prove automated ci/cd process, a local lab for kubernetes cluster, a playground for people preparing for cert exams like CKA, CKAD etc. and for hobbyist and devops fanatics that like to play and integrate different technologies into a pipeline. This can be a good start. 
+
+This project will run jenkins pipeline that will create workloads for simple application(for now). Simple "hello world" program written in Python that will be deployed in a container once it passed our test and security checks.
 
 # Device Specification
 * Processor	Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz   3.60 GHz
