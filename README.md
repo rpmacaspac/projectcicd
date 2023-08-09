@@ -13,4 +13,5 @@ Jenkins running on default namespace wsl2(docker desktop integrated)
 Helm to install kubernetes workload
 
 
-![pipeline design](https://github.com/rpmacaspac/projectcicd/assets/15140570/21429449-6ac8-4f95-a846-ea90f0f79212)
+
+![pipeline design](https://github.com/rpmacaspac/projectcicd/assets/15140570/8cf58352-ca0c-4b7b-976d-2e8b2f95c30c)
