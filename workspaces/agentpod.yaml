@@ -9,8 +9,7 @@ spec:
   containers:
     - name: docker
       image: docker:24
-      command:
-        - sleep 9999999
+      command: ["sleep", "999999"]
       tty: true
       securityContext:
         privileged: True
