@@ -16,6 +16,7 @@ agent {
         metadata:
           labels:
             some-label: kaniko
+          namespace: devops-tools
         spec:
           containers:
           - name: kaniko
