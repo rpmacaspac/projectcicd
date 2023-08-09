@@ -4,7 +4,7 @@ metadata:
   labels:
     some-label: pod
   name: agent-orange
-  namespace: jenkins
+  namespace: devops-tools
 spec:
   containers:
     - name: maven
