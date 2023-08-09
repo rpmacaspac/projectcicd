@@ -2,15 +2,15 @@
 Project cicd will test jenkins pipeline that will create workloads for our simple application. Simple "hello world" program written in Python will be deployed in a container once it pass the test and security checks.
 
 Tools used:
-Markup :  *Virtual box that will host our mini cluster(1 master, 2 nodes)
-          *Vagrant setup for Kubernetes Cluster in VirtualBox
-          *WSL2 for creating container and managing kubernetes cluster
-          *Rancher for managing cluster through UI
-          *Harbor for storing docker images
-          *Sonarqube running in cluster to check code smelss
-          *Trivy running in cluster to check docker images security and vulnerability checks
-          *Jenkins running on default namespace wsl2(docker desktop integrated)
-          *Helm to install kubernetes workload
+          * Virtual box that will host our mini cluster(1 master, 2 nodes)
+          * Vagrant setup for Kubernetes Cluster in VirtualBox
+          * WSL2 for creating container and managing kubernetes cluster
+          * Rancher for managing cluster through UI
+          * Harbor for storing docker images
+          * Sonarqube running in cluster to check code smelss
+          * Trivy running in cluster to check docker images security and vulnerability checks
+          * Jenkins running on default namespace wsl2(docker desktop integrated)
+          * Helm to install kubernetes workload
 
 
 
