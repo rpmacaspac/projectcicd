@@ -8,13 +8,30 @@ pipeline {
     projectDir = "workspaces/"
   }
 
-  agent {
+agent {
     kubernetes {
-        defaultContainer 'jnlp'
-        yamlFile 'workspaces/agentpod.yaml'
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          labels:
+            some-label: kaniko
+        spec:
+          containers:
+          - name: kaniko
+            image: bitnami/kaniko:latest
+            command:
+            - cat
+            tty: true
+          - name: busybox
+            image: busybox
+            command:
+            - cat
+            tty: true
+        '''
+      retries 2
     }
-}
-
+  }
   stages {
 
     stage('Checkout Source') {
@@ -25,9 +42,9 @@ pipeline {
 
     stage('Build image') {
       steps{
-        container('docker'){
+        container('kaniko'){
           script {
-              def imageName = 'my-app:latest'
+              def dockerImageName = 'my-app:latest'
               def dockerFile = "${projectDir}/Dockerfile"
               dockerImage = docker.build(dockerImageName, "-f ${dockerFile} .")
           }
