@@ -7,18 +7,10 @@ metadata:
   namespace: devops-tools
 spec:
   containers:
-    - name: maven
-      image: maven:3.3.9-jdk-8-alpine
-      command:
-        - cat
-      tty: true
-      volumeMounts:
-        - name: m2
-          mountPath: /root/.m2
     - name: docker
       image: docker:24
       command:
-        - cat
+        - sleep 9999999
       tty: true
       securityContext:
         privileged: True
