@@ -25,14 +25,12 @@ pipeline {
 
     stage('Build image') {
       steps{
-        container('docker'){
           script {
               def dockerImageName = 'my-app:latest'
               def dockerFile = "${projectDir}/Dockerfile"
               dockerImage = docker.build(dockerImageName, "-f ${dockerFile} .")
           }
         }
-      }
     }
 
     stage('Pushing Image') {
