@@ -22,12 +22,12 @@ agent {
           - name: kaniko
             image: bitnami/kaniko:latest
             command:
-            - cat
+              - cat
             tty: true
           - name: busybox
             image: busybox
             command:
-            - cat
+              - cat
             tty: true
         '''
       retries 2
