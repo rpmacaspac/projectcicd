@@ -7,13 +7,13 @@ pipeline {
     dockerImage = ""
     projectDir = "workspaces/"
   }
-
-  agent {
-    kubernetes {
-        defaultContainer 'jnlp'
-        yamlFile 'workspaces/agentpod.yaml'
-    }
-}
+  agent any
+  // agent {
+  //   kubernetes {
+  //       defaultContainer 'jnlp'
+  //       yamlFile 'workspaces/agentpod.yaml'
+  //   }
+//}
 
   stages {
 
