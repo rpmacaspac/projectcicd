@@ -12,6 +12,11 @@ Tools used:
           * Jenkins running on default namespace wsl2(docker desktop integrated)
           * Helm to install kubernetes workload
 
+ Markup : * Bullet list
+              * Nested bullet
+                  * Sub-nested bullet etc
+          * Bullet list item 2
+
 
 
 ![pipeline design](https://github.com/rpmacaspac/projectcicd/assets/15140570/8cf58352-ca0c-4b7b-976d-2e8b2f95c30c)
