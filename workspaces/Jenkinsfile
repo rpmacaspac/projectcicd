@@ -59,7 +59,7 @@ pipeline {
 
     stage('Build image') {
       steps{
-        container(kaniko){
+        container(docker-dind-pod){
           script {
               def dockerImageName = 'my-app:latest'
               def dockerFile = "${projectDir}/Dockerfile"
