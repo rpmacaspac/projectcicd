@@ -18,22 +18,27 @@ pipeline {
             //     args 'infinity'
             // }
                   yaml '''
-                apiVersion: v1
-                kind: Pod
-                metadata:
-                  labels:
-                    app: jenkins-slave
-                  namespace: jenkins
-                spec:
-                  serviceAccountName: jenkins-slave
-                  containers:
-                  - name: kaniko
-                    image: gcr.io/kaniko-project/executor:latest
-                    command:
-                      - cat
-                    tty: true
-                  imagePullSecrets:
-                    - name: dockercreds
+                  apiVersion: v1
+                  kind: Pod
+                  metadata:
+                    name: docker-dind-pod
+                    namespace: devops-tools
+                  spec:
+                    containers:
+                    - name: docker-dind-container
+                      image: docker:dind
+                      securityContext:
+                        privileged: true
+                      volumeMounts:
+                      - name: dockersock
+                        mountPath: /var/run/docker.sock
+                      tty: true
+                    volumes:
+                    - name: dockersock
+                      hostPath:
+                        path: /var/run/docker.sock
+                    imagePullSecrets:
+                      - name: dockercreds
                 '''
             // Can also wrap individual steps:
         //     container('shell') {
