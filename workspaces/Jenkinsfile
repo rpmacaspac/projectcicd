@@ -25,7 +25,7 @@ pipeline {
                     namespace: devops-tools
                   spec:
                     containers:
-                    - name: docker-dind-container
+                    - name: dind
                       image: docker:dind
                       securityContext:
                         privileged: true
@@ -59,7 +59,7 @@ pipeline {
 
     stage('Build image') {
       steps{
-        container(docker-dind-pod){
+        container(dind){
           script {
               def dockerImageName = 'my-app:latest'
               def dockerFile = "${projectDir}/Dockerfile"
