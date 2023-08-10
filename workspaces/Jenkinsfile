@@ -9,45 +9,7 @@ pipeline {
   }
   agent {
     kubernetes {
-            // Rather than inline YAML, in a multibranch Pipeline you could use: yamlFile 'jenkins-pod.yaml'
-            // Or, to avoid YAML:
-            // containerTemplate {
-            //     name 'shell'
-            //     image 'ubuntu'
-            //     command 'sleep'
-            //     args 'infinity'
-            // }
-                  yaml '''
-                  apiVersion: v1
-                  kind: Pod
-                  metadata:
-                    name: jenkins-slave
-                    namespace: devops-tools
-                    labels:
-                      jenkins: "slave"
-                  spec:
-                    containers:
-                    - name: jenkins-slave
-                      image: docker:dind
-                      securityContext:
-                        privileged: true
-                      volumeMounts:
-                      - name: dockersock
-                        mountPath: /var/run/docker.sock
-                      tty: true
-                    volumes:
-                    - name: dockersock
-                      hostPath:
-                        path: /var/run/docker.sock
-                    imagePullSecrets:
-                      - name: dockercreds
-                '''
-            // Can also wrap individual steps:
-        //     container('shell') {
-        //         sh 'hostname'
-        //     }
-        //     defaultContainer 'shell'
-        // }
+            inheritFrom 'jenkins-slave'
     }
   }
 
