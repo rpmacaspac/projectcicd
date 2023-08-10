@@ -21,8 +21,10 @@ pipeline {
                   apiVersion: v1
                   kind: Pod
                   metadata:
-                    name: docker-dind-pod
+                    name: jenkins-slave
                     namespace: devops-tools
+                    labels:
+                      name: "jenkins-slave"
                   spec:
                     containers:
                     - name: dind
