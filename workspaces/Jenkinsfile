@@ -20,20 +20,14 @@ pipeline {
     //     git 'https://github.com/rpmacaspac/projectcicd.git'
     //   }
     // }
-    
-podTemplate {
-  node(POD_LABEL){
-    stage('Build image') {
-      steps{
-          script {
-              dockerImage = docker.build dockerImageName
-          }
-      }
-    }
-    
-  }
 
-}
+  stage('Build image') {
+    steps{
+        script {
+            dockerImage = docker.build dockerImageName
+        }
+    }
+  }
 
     stage('Pushing Image') {
       environment {
