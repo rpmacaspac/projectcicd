@@ -10,7 +10,6 @@ pipeline {
   agent {
     kubernetes {
             inheritFrom 'jenkins-slave'
-            label 'docker-agent'
     }
   }
 
