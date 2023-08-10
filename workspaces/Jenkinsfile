@@ -4,7 +4,7 @@ pipeline {
 
   environment {
     dockerImageName = "rpmacaspac/projectcicd"
-    dockerImage = ""
+
     projectDir = "workspaces/"
   }
   agent {
@@ -15,19 +15,17 @@ pipeline {
 
   stages {
 
-    stage('Checkout Source') {
-      steps {
-        git 'https://github.com/rpmacaspac/projectcicd.git'
-      }
-    }
+    // stage('Checkout Source') {
+    //   steps {
+    //     git 'https://github.com/rpmacaspac/projectcicd.git'
+    //   }
+    // }
 
     stage('Build image') {
       steps{
         container('jenkins-slave'){
           script {
-              def dockerImageName = 'my-app:latest'
-              def dockerFile = "${projectDir}/Dockerfile"
-              dockerImage = docker.build(dockerImageName, "-f ${dockerFile} .")
+              dockerImage = docker.build dockerImageName
           }
         }
       }
