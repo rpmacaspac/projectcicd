@@ -59,7 +59,7 @@ pipeline {
 
     stage('Build image') {
       steps{
-        container(dind){
+        container('dind'){
           script {
               def dockerImageName = 'my-app:latest'
               def dockerFile = "${projectDir}/Dockerfile"
