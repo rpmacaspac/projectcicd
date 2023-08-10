@@ -21,8 +21,9 @@ pipeline {
                 apiVersion: v1
                 kind: Pod
                 metadata:
-                labels:
-                  app: jenkins-slave
+                  labels:
+                    app: jenkins-slave
+                  namespace: jenkins
                 spec:
                   serviceAccountName: jenkins-slave
                   containers:
