@@ -20,16 +20,20 @@ pipeline {
     //     git 'https://github.com/rpmacaspac/projectcicd.git'
     //   }
     // }
-
+    
+podTemplate {
+  node(POD_LABEL){
     stage('Build image') {
       steps{
-        container('jenkins-slave'){
           script {
               dockerImage = docker.build dockerImageName
           }
-        }
       }
     }
+    
+  }
+
+}
 
     stage('Pushing Image') {
       environment {
