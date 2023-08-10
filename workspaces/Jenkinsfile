@@ -10,6 +10,7 @@ pipeline {
   agent {
     kubernetes {
             inheritFrom 'jenkins-slave'
+            label 'docker-agent'
     }
   }
 
@@ -35,7 +36,7 @@ pipeline {
            }
       steps{
         script {
-          docker.withRegistry(${dockerRegistry} , registryCredential ) {
+          docker.withRegistry("${dockerRegistry}" , registryCredential ) {
             dockerImage.push("latest")
           }
         }
