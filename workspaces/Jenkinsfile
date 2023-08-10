@@ -24,10 +24,10 @@ pipeline {
                     name: jenkins-slave
                     namespace: devops-tools
                     labels:
-                      name: "jenkins-slave"
+                      name: jenkins-slave
                   spec:
                     containers:
-                    - name: dind
+                    - name: jenkins-slave
                       image: docker:dind
                       securityContext:
                         privileged: true
@@ -61,7 +61,7 @@ pipeline {
 
     stage('Build image') {
       steps{
-        container('dind'){
+        container('jenkins-slave'){
           script {
               def dockerImageName = 'my-app:latest'
               def dockerFile = "${projectDir}/Dockerfile"
