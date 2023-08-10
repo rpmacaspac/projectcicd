@@ -24,7 +24,7 @@ pipeline {
                     name: jenkins-slave
                     namespace: devops-tools
                     labels:
-                      name: jenkins-slave
+                      jenkins: "slave"
                   spec:
                     containers:
                     - name: jenkins-slave
