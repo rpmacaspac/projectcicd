@@ -9,7 +9,7 @@ pipeline {
   }
   agent {
     kubernetes {
-            inheritFrom 'jenkins-slave'
+            inheritFrom 'jnlp'
     }
   }
 
@@ -23,11 +23,11 @@ pipeline {
 
   stage('Build image') {
     steps{
-      container('jenkins-slave'){
-        // script {
-        //     dockerImage = docker.build(dockerImageName)
-        // }
-      echo "Hello World"
+      container('jnlp'){
+        script {
+            dockerImage = docker.build(dockerImageName)
+        }
+ //     echo "Hello World"
       }
     }
   }
