@@ -9,7 +9,35 @@ pipeline {
   }
   agent {
     kubernetes {
-            inheritFrom 'jenkins-slave'
+
+        yaml '''
+            apiVersion: v1
+            kind: Pod
+            metadata:
+              labels:
+                jenkins: slave
+              namespace: devops-tools
+
+            spec:
+              containers:
+              - args:
+                - cat
+                command:
+                - /bin/sh
+                - -c
+                image: woozymasta/kaniko-tools
+                name: jenkins-slave
+                securityContext:
+                  privileged: false
+                  runAsGroup: 1000
+                  runAsUser: 1000
+                volumeMounts:
+                - mountPath: /home/jenkins/agent
+                  name: workspace-volume
+              volumes:
+              - emptyDir: {}
+                name: workspace-volume 
+      '''
     }
   }
 

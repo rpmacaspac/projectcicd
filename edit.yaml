@@ -2,56 +2,57 @@ apiVersion: v1
 kind: Pod
 metadata:
   annotations:
-    buildUrl: http://10.0.0.11:32000/job/pipeline01/78/
-    cni.projectcalico.org/containerID: 4a5a825ba00bd962720b2db0e100194c03f22e53ecbb66e06bb07800bbb7f7ba
-    cni.projectcalico.org/podIP: 172.16.87.219/32
-    cni.projectcalico.org/podIPs: 172.16.87.219/32
-    runUrl: job/pipeline01/78/
-  creationTimestamp: "2023-08-11T03:12:45Z"
+    buildUrl: http://172.28.180.75:8080/job/pipeline01/24/
+    cni.projectcalico.org/containerID: 9967e6c1939bc9f8f70b8eb7966f133428b23df1dbfb4cf7057eba1c51300d5b
+    cni.projectcalico.org/podIP: 172.16.87.227/32
+    cni.projectcalico.org/podIPs: 172.16.87.227/32
+    runUrl: job/pipeline01/24/
+  creationTimestamp: "2023-08-11T14:01:29Z"
   labels:
-    jenkins/label: pipeline01_78-r2p7w
-    jenkins/label-digest: 388d4fa6edb4b92c7b42305e18be33594533c7a1
-    name: jenkins-slave
-  name: pipeline01-78-r2p7w-28rkq-ntw7v
+    jenkins: slave
+    jenkins/label: pipeline01_24-3vh0z
+    jenkins/label-digest: c5185c81b7f6887709d46926594914563c1a1405
+  name: pipeline01-24-3vh0z-jf25n-ns6px
   namespace: devops-tools
-  resourceVersion: "149364"
-  uid: fe300659-e239-41a1-8918-4bcd383e4292
+  resourceVersion: "187404"
+  uid: 3ac551b0-96f7-44d5-8821-00b484b88d4e
 spec:
   containers:
   - args:
-    - "99999"
+    - cat
     command:
-    - sleep
-    image: jpetazzo/dind
+    - /bin/sh
+    - -c
+    image: woozymasta/kaniko-tools
     imagePullPolicy: IfNotPresent
     name: jenkins-slave
     resources: {}
     securityContext:
-      privileged: true
+      privileged: false
       runAsGroup: 1000
       runAsUser: 1000
     terminationMessagePath: /dev/termination-log
     terminationMessagePolicy: File
     volumeMounts:
-    - mountPath: /home/jenkins/
+    - mountPath: /home/jenkins/agent
       name: workspace-volume
     - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-      name: kube-api-access-225cq
+      name: kube-api-access-pj984
       readOnly: true
-    workingDir: /home/jenkins/
+    workingDir: /home/jenkins/agent
   - env:
     - name: JENKINS_SECRET
-      value: 5182f217c8e615fd9810043629954a4bb9ee7814af4b2f5920ecec4823fbe84c
+      value: bf1856615ce3a8e8c255df2c2af515d61637e65adb52131348448c2b25893ce8
     - name: JENKINS_TUNNEL
-      value: 10.0.0.11:31945
+      value: 172.28.180.75:50000
     - name: JENKINS_AGENT_NAME
-      value: pipeline01-78-r2p7w-28rkq-ntw7v
+      value: pipeline01-24-3vh0z-jf25n-ns6px
     - name: JENKINS_NAME
-      value: pipeline01-78-r2p7w-28rkq-ntw7v
+      value: pipeline01-24-3vh0z-jf25n-ns6px
     - name: JENKINS_AGENT_WORKDIR
       value: /home/jenkins/agent
     - name: JENKINS_URL
-      value: http://10.0.0.11:32000/
+      value: http://172.28.180.75:8080/
     image: jenkins/inbound-agent:3131.vf2b_b_798b_ce99-2
     imagePullPolicy: IfNotPresent
     name: jnlp
@@ -65,7 +66,7 @@ spec:
     - mountPath: /home/jenkins/agent
       name: workspace-volume
     - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
-      name: kube-api-access-225cq
+      name: kube-api-access-pj984
       readOnly: true
   dnsPolicy: ClusterFirst
   enableServiceLinks: true
@@ -76,11 +77,9 @@ spec:
   priority: 0
   restartPolicy: Never
   schedulerName: default-scheduler
-  securityContext:
-    runAsGroup: 1000
-    runAsUser: 1000
-  serviceAccount: jenkins-admin
-  serviceAccountName: jenkins-admin
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
   terminationGracePeriodSeconds: 30
   tolerations:
   - effect: NoExecute
@@ -94,7 +93,7 @@ spec:
   volumes:
   - emptyDir: {}
     name: workspace-volume
-  - name: kube-api-access-225cq
+  - name: kube-api-access-pj984
     projected:
       defaultMode: 420
       sources:
@@ -115,34 +114,42 @@ spec:
 status:
   conditions:
   - lastProbeTime: null
-    lastTransitionTime: "2023-08-11T03:12:46Z"
+    lastTransitionTime: "2023-08-11T14:01:28Z"
     status: "True"
     type: Initialized
   - lastProbeTime: null
-    lastTransitionTime: "2023-08-11T03:12:47Z"
-    status: "True"
+    lastTransitionTime: "2023-08-11T14:01:28Z"
+    message: 'containers with unready status: [jenkins-slave]'
+    reason: ContainersNotReady
+    status: "False"
     type: Ready
   - lastProbeTime: null
-    lastTransitionTime: "2023-08-11T03:12:47Z"
-    status: "True"
+    lastTransitionTime: "2023-08-11T14:01:28Z"
+    message: 'containers with unready status: [jenkins-slave]'
+    reason: ContainersNotReady
+    status: "False"
     type: ContainersReady
   - lastProbeTime: null
-    lastTransitionTime: "2023-08-11T03:12:45Z"
+    lastTransitionTime: "2023-08-11T14:01:29Z"
     status: "True"
     type: PodScheduled
   containerStatuses:
-  - containerID: cri-o://18f8e67004e11171a64334c8d9e5210c296fd5a8b45dd6e852c0fdd6d8829d06
-    image: docker.io/jpetazzo/dind:latest
-    imageID: docker.io/jpetazzo/dind@sha256:f48a1bbf379afdb7a7685abd0130ccd2f214662b086eb7320c296ee83fc6448e
+  - containerID: cri-o://7afa57e86251425cc7944c84dc2338788094f3d719ba5f9dbeeb685cb4cd326d
+    image: docker.io/woozymasta/kaniko-tools:latest
+    imageID: docker.io/woozymasta/kaniko-tools@sha256:0f67edbae32ffd9057958c4236121c05ce91d1c20a27acd867313fbe6d4566b8
     lastState: {}
     name: jenkins-slave
-    ready: true
+    ready: false
     restartCount: 0
-    started: true
+    started: false
     state:
-      running:
-        startedAt: "2023-08-11T03:12:47Z"
-  - containerID: cri-o://fbeb635c07b9c8d8e6ed8f3706d822c3b803e8d18e3391e31c7207a47a45d2e3
+      terminated:
+        containerID: cri-o://7afa57e86251425cc7944c84dc2338788094f3d719ba5f9dbeeb685cb4cd326d
+        exitCode: 0
+        finishedAt: "2023-08-11T14:01:29Z"
+        reason: Completed
+        startedAt: "2023-08-11T14:01:29Z"
+  - containerID: cri-o://bf2e36dfdbaae0296542f8ef215ebc503dd762c336a6eb75e5157c7c441bc14a
     image: docker.io/jenkins/inbound-agent:3131.vf2b_b_798b_ce99-2
     imageID: docker.io/jenkins/inbound-agent@sha256:663103245845ebf133e6fa104f10593690ed434011c0549d7746bc686683269a
     lastState: {}
@@ -152,11 +159,11 @@ status:
     started: true
     state:
       running:
-        startedAt: "2023-08-11T03:12:47Z"
+        startedAt: "2023-08-11T14:01:29Z"
   hostIP: 10.0.0.11
   phase: Running
-  podIP: 172.16.87.219
+  podIP: 172.16.87.227
   podIPs:
-  - ip: 172.16.87.219
+  - ip: 172.16.87.227
   qosClass: Burstable
-  startTime: "2023-08-11T03:12:46Z"
+  startTime: "2023-08-11T14:01:28Z"
