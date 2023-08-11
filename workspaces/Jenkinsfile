@@ -24,9 +24,10 @@ pipeline {
   stage('Build image') {
     steps{
       container('jenkins-slave'){
-        script {
-            dockerImage = docker.build(dockerImageName)
-        }
+        // script {
+        //     dockerImage = docker.build(dockerImageName)
+        // }
+      echo "Hello World"
       }
     }
   }
