@@ -23,7 +23,7 @@ pipeline {
 
   stage('Build image') {
     steps{
-      container('jnlp'){
+      container('jenkins-slave'){
         script {
             dockerImage = docker.build(dockerImageName)
         }
