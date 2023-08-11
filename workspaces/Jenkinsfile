@@ -9,7 +9,7 @@ pipeline {
   }
   agent {
     kubernetes {
-            inheritFrom 'jnlp'
+            inheritFrom 'jenkins-slave'
     }
   }
 
