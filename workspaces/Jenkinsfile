@@ -28,7 +28,6 @@ pipeline {
                 image: woozymasta/kaniko-tools
                 name: jenkins-slave
                 securityContext:
-                  privileged: false
                   runAsGroup: 1000
                   runAsUser: 1000
                 volumeMounts:
