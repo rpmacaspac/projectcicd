@@ -15,7 +15,7 @@ pipeline {
             kind: Pod
             metadata:
               labels:
-                jenkins: slave
+                name: jenkins-slave
               namespace: devops-tools
 
             spec:
