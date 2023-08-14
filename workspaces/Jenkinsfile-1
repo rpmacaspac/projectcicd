@@ -15,7 +15,7 @@ pipeline {
             args: ["--dockerfile=workspaces/Dockerfile",
                     "--context=dir://workspaces",
                     "--destination=rpmacaspac/projectcicd:1.0.0"]
-            volumemounts:
+            volumeMounts:
                 - name: kaniko-secret
                   mountPath: /kaniko/.docker
             restartPolicy: Never
