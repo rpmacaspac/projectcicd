@@ -7,9 +7,9 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
-    args: ["--dockerfile=workspaces/Dockerfile",
-            "--context=dir://workspaces",
-            "--destination=rpmacaspac/projectcicd:1.0.0"]
+    args: ["--context=git://github.com/rpmacaspac/projectcicd",
+           "--context-sub-path=workspaces",
+            "--destination=rpmacaspac/devops-toolkit:1.0.0"]
     volumeMounts:
         - name: kaniko-secret
           mountPath: /kaniko/.docker
