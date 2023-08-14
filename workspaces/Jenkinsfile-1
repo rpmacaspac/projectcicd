@@ -1,15 +1,43 @@
 
 
 pipeline {
-    agent {
-        docker { image 'woozymasta/kaniko-tool'}
+  agent {
+    kubernetes {
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        metadata:
+          name: kaniko
+        spec:
+          containers:
+          - name: kaniko
+            image: gcr.io/kaniko-project/executor:debug
+            args: ["--dockerfile=workspaces/Dockerfile",
+                    "--context=dir://workspaces",
+                    "--destination=rpmacaspac/projectcicd:1.0.0"]
+            volumemounts:
+                - name: kaniko-secret
+                  mountPath: /kaniko/.docker
+            restartPolicy: Never
+            volumes:
+                - name: kaniko-secret
+                  secret:
+                    secretName: regcred
+                    items:
+                        - key: .dockerconfigjson
+                          path: config.json
+        '''
     }
+  }
 
-    stages {
-        stage('Test'){
-            steps {
-                sh 'docker --version'
-            }
+
+  stages {
+    stage("Test"){
+        steps {
+            container('kaniko')
+            sh 'ls workspaces/'
         }
     }
+  }
+
 }
