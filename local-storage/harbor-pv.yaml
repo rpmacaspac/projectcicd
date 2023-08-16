@@ -1,0 +1,126 @@
+# <!-- # below are used when installing harbor in kubernetes via helm with local-storage. As we use storage class with provisioner no-provisioner,
+#  we are required to create pv manually before its bound to pvcs(created by chart automatically). StorageClass used was local-storage since we are using lab project locally -->
+
+
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-storage-1g-1
+spec:
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: "local-storage"
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  volumeMode: Filesystem
+  local:
+    path: /vagrant/pv/1
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - worker-node01
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-storage-1g-2
+spec:
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: "local-storage"
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  volumeMode: Filesystem
+  local:
+    path: /vagrant/pv/2
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - worker-node01
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-storage-1g-3
+spec:
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: "local-storage"
+  capacity:
+    storage: 1Gi
+  accessModes:
+  - ReadWriteOnce
+  volumeMode: Filesystem
+  local:
+    path: /vagrant/pv/3
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - worker-node01
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-storage-1g-4
+spec:
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: "local-storage"
+  capacity:
+    storage: 5Gi
+  accessModes:
+  - ReadWriteOnce
+  volumeMode: Filesystem
+  local:
+    path: /vagrant/pv/4
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - worker-node01
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: local-storage-1g-5
+spec:
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Delete
+  storageClassName: "local-storage"
+  capacity:
+    storage: 5Gi
+  accessModes:
+  - ReadWriteOnce
+  volumeMode: Filesystem
+  local:
+    path: /vagrant/pv/5
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: kubernetes.io/hostname
+          operator: In
+          values:
+          - worker-node01
+
