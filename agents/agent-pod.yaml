@@ -9,16 +9,16 @@ spec:
     image: gcr.io/kaniko-project/executor:debug
     args: ["--context=git://github.com/rpmacaspac/projectcicd",
            "--dockerfile=workspaces/Dockerfile",
-            "--destination=ireborn/projectcicd/devops-toolkit:1.0.0"]
+            "--destination=rpmacaspac/devops-toolkit:1.0.0"]
     volumeMounts:
-        - name: kaniko-secret
-          mountPath: /kaniko/.docker
-    command: ["/bin/sh", "-c", "cat"]
+    - name: kaniko-secret
+      mountPath: /kaniko/.docker
+    command: ["/bin/sh", "-c", "sleep 3600"]
 
   volumes:
-        - name: kaniko-secret
-          secret:
-            secretName: regcred3
-            items:
-                - key: .dockerconfigjson
-                  path: config.json
+  - name: kaniko-secret
+    secret:
+      secretName: regcred
+      items:
+      - key: .dockerconfigjson
+        path: config.json
