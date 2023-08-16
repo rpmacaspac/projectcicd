@@ -7,29 +7,26 @@ pipeline {
         apiVersion: v1
         kind: Pod
         metadata:
-            name: kaniko
-            namespace: devops-tools
+          name: kaniko
+          namespace: devops-tools
         spec:
-            containers:
-            - name: kaniko
-                image: gcr.io/kaniko-project/executor:debug
-                args: ["--context=git://github.com/rpmacaspac/projectcicd",
-                        "--dockerfile=workspaces/Dockerfile",
-                        "--destination=ireborn/projectcicd/devops-toolkit:1.0.0"]
-                volumeMounts:
-                    - name: kaniko-secret
-                      mountPath: /kaniko/.docker
-                command:
-                    - "sleep"
-                    - 3600
-
+          containers:
+          - name: kaniko
+            image: gcr.io/kaniko-project/executor:debug
+            args: ["--dockerfile=workspaces/Dockerfile",
+                    "--context=dir://workspaces",
+                    "--destination=rpmacaspac/projectcicd:1.0.0"]
+            volumeMounts:
+                - name: kaniko-secret
+                  mountPath: /kaniko/.docker
+            restartPolicy: Never
             volumes:
-            - name: kaniko-secret
-              secret:
-                secretName: regcred3
-                items:
-                  - key: .dockerconfigjson
-                    path: config.json
+                - name: kaniko-secret
+                  secret:
+                    secretName: regcred
+                    items:
+                        - key: .dockerconfigjson
+                          path: config.json
         '''
     }
   }
@@ -39,7 +36,7 @@ pipeline {
     stage("Test"){
         steps {
             container('kaniko')
-            sh 'docker image ls'
+            sh 'ls workspaces/'
         }
     }
   }
