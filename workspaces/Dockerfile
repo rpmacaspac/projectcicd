@@ -3,4 +3,5 @@ FROM nginx:latest
 
 # Copy your index.html file into the Nginx HTML directory
 COPY workspaces/src/index.html /usr/share/nginx/html/
+CMD [ "echo", "hello devops" ]
 EXPOSE 80

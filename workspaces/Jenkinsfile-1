@@ -36,8 +36,10 @@ pipeline {
   stages {
     stage("Test"){
         steps {
-            container('kaniko')
-            sh 'ls workspaces/'
+            container('kaniko'){
+              sh 'ls workspaces/'
+            }
+
         }
     }
   }
