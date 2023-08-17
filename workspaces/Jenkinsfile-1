@@ -12,7 +12,7 @@ pipeline {
       spec:
         containers:
         - name: kaniko
-          image: gcr.io/kaniko-project/executor:v1.14.0-debug
+          image: gcr.io/kaniko-project/executor:v1.13.0-debug
           args: ["--context=git://github.com/rpmacaspac/projectcicd",
                 "--dockerfile=workspaces/Dockerfile",
                   "--destination=rpmacaspac/devops-toolkit:1.1.0"]
