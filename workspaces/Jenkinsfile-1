@@ -1,14 +1,17 @@
 
 
 pipeline {
-  agent {
-    kubernetes {
-      yamlFile 'agent-pod.yaml'
-    }
+
+  stages {
+    stage("Build"){
+      agent {
+        kubernetes {
+        yamlFile 'agent-pod.yaml'
+        }
+      }
   }
 
 
-  stages {
     stage("Test"){
         steps {
             container('jnlp'){
@@ -18,5 +21,6 @@ pipeline {
         }
     }
   }
+
 
 }
