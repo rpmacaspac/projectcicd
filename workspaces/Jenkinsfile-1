@@ -3,7 +3,6 @@
 pipeline {
   agent {
     kubernetes {
-      customWorkspace '../agents'
       yamlFile 'agent-pod.yaml'
     }
   }
@@ -13,7 +12,7 @@ pipeline {
     stage("Test"){
         steps {
             container('kaniko'){
-              sh 'ls workspaces/'
+              sh 'ls -R *'
             }
 
         }
