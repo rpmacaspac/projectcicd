@@ -1,26 +1,20 @@
 
 
 pipeline {
-
-  stages {
-    stage("Build"){
-      agent {
-        kubernetes {
-        yamlFile 'agent-pod.yaml'
-        }
-      }
-  }
-
-
-    stage("Test"){
-        steps {
-            container('jnlp'){
-              sh 'pwd && ls'
-            }
-
-        }
+  agent {
+    kubernetes {
+      defaultContainer 'jnlp'
+      yamlFile 'agent-pod.yaml'
     }
   }
 
+
+  stages {
+    stage("Test"){
+        steps {
+          sh 'pwd && ls'
+        }
+    }
+  }
 
 }
