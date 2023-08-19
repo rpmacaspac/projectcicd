@@ -15,7 +15,7 @@ spec:
     image: gcr.io/kaniko-project/executor:latest
     imagePullPolicy: Always
     args:
-    - "--context=git://github.com/scriptcamp/kubernetes-kaniko"
+    - "--context=git://github.com/rpmacaspac/projectcicd"
     - "--destination=rpmacaspac/kaniko-demo-image:1.2"
     - "--cache=true"
     volumeMounts:
