@@ -2,23 +2,21 @@ apiVersion: v1
 kind: Pod
 metadata:
   name: kaniko
-  namespace: devops-tools
 spec:
   containers:
   - name: kaniko
-    image: gcr.io/kaniko-project/executor:debug
-    args: ["--context=git://github.com/rpmacaspac/projectcicd",
-           "--dockerfile=workspaces/Dockerfile",
-            "--destination=rpmacaspac/devops-toolkit:1.0.0"]
+    image: gcr.io/kaniko-project/executor:latest
+    args:
+    - "--context=git://github.com/scriptcamp/kubernetes-kaniko"
+    - "--destination=rpmacaspac/kaniko-demo-image:1.0"
     volumeMounts:
     - name: kaniko-secret
       mountPath: /kaniko/.docker
-    command: ["/bin/sh", "-c", "sleep 3600"]
-
+  restartPolicy: Never
   volumes:
   - name: kaniko-secret
     secret:
       secretName: regcred
       items:
-      - key: .dockerconfigjson
-        path: config.json
+        - key: .dockerconfigjson
+          path: config.json

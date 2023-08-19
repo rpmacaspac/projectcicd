@@ -12,15 +12,14 @@ pipeline {
       spec:
         containers:
         - name: kaniko
-          image: gcr.io/kaniko-project/executor:v1.13.0-debug
-          args: ["--context=git://github.com/rpmacaspac/projectcicd",
-                "--dockerfile=workspaces/Dockerfile",
-                  "--destination=rpmacaspac/devops-toolkit:1.1.0"]
+          image: gcr.io/kaniko-project/executor:latest
+          args:
+          - "--context=git//github.com/rpmacaspac/projectcicd"
+          - "--dockerfile=workspaces/Dockerfile"
+          - "--destination=rpmacaspac/devops-toolkit:1.1.0"
           volumeMounts:
           - name: kaniko-secret
             mountPath: /kaniko/.docker
-          command: ["/bin/sh", "-c", "sleep 3600"]
-
         volumes:
         - name: kaniko-secret
           secret:
@@ -38,6 +37,7 @@ pipeline {
         steps {
             container('kaniko'){
               sh 'ls workspaces/'
+              sh 'docker build . -t devops-toolkit:1.1.0'
             }
 
         }
