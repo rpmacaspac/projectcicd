@@ -11,6 +11,7 @@ spec:
     args:
     - "--context=git://github.com/scriptcamp/kubernetes-kaniko"
     - "--destination=rpmacaspac/kaniko-demo-image:1.2"
+    - "--cache=true"
     volumeMounts:
     - name: kaniko-secret
       mountPath: /kaniko/.docker
