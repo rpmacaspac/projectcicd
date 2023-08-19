@@ -11,7 +11,7 @@ pipeline {
   stages {
     stage("Test"){
         steps {
-            container('kaniko'){
+            container('jnlp'){
               sh 'pwd && ls'
             }
 
