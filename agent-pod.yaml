@@ -6,9 +6,13 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:latest
+    imagePullPolicy: Always
+    command:
+    - /busybox/cat
+    tty: true
     args:
     - "--context=git://github.com/scriptcamp/kubernetes-kaniko"
-    - "--destination=rpmacaspac/kaniko-demo-image:1.0"
+    - "--destination=rpmacaspac/kaniko-demo-image:1.2"
     volumeMounts:
     - name: kaniko-secret
       mountPath: /kaniko/.docker
