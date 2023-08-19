@@ -8,8 +8,8 @@ spec:
     image: gcr.io/kaniko-project/executor:latest
     imagePullPolicy: Always
     command:
-    - /busybox/cat
-    tty: true
+    - /bin/sh
+    - cat
     args:
     - "--context=git://github.com/scriptcamp/kubernetes-kaniko"
     - "--destination=rpmacaspac/kaniko-demo-image:1.2"
