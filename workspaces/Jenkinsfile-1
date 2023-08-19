@@ -30,8 +30,8 @@ spec:
         - key: .dockerconfigjson
           path: config.json
     '''
+    }
   }
-
 
   stages {
     stage("Test"){
