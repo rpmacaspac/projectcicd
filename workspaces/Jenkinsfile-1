@@ -13,7 +13,6 @@ spec:
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
-    command: ["sleep", "43200"]
     imagePullPolicy: Always
     args:
     - "--context=git://github.com/rpmacaspac/projectcicd"
@@ -41,7 +40,7 @@ spec:
   stages {
     stage("Test"){
         steps {
-            container('jnlp'){
+            container(name: 'kaniko', shell: '/busybox/sh'){
               sh 'pwd && ls'
               echo "${BUILD}"
             }
