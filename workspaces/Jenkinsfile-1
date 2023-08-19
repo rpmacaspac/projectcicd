@@ -1,5 +1,5 @@
 
-
+def BUILD = env.BUILD
 
 pipeline {
   agent {
@@ -17,7 +17,7 @@ spec:
     imagePullPolicy: Always
     args:
     - "--context=git://github.com/rpmacaspac/projectcicd"
-    - "--destination=rpmacaspac/kaniko-demo-image:1.2"
+    - "--destination=rpmacaspac/kaniko-demo-image:${BUILD}"
     - "--cache=true"
     volumeMounts:
     - name: kaniko-secret
