@@ -1,5 +1,6 @@
 
 
+
 pipeline {
   agent {
     kubernetes {
@@ -33,11 +34,16 @@ spec:
     }
   }
 
+  environment {
+    BUILD = sh ( 'cat "build_number.txt"' )
+  }
+
   stages {
     stage("Test"){
         steps {
             container('jnlp'){
               sh 'pwd && ls'
+              echo "${BUILD}"
             }
         }
     }
