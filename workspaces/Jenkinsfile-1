@@ -15,7 +15,7 @@ pipeline {
           image: gcr.io/kaniko-project/executor:latest
           args:
           - "--context=git//github.com/rpmacaspac/projectcicd"
-          - "--dockerfile=workspaces/Dockerfile"
+          - "--context-sub-path=workspaces"
           - "--destination=rpmacaspac/devops-toolkit:1.1.0"
           volumeMounts:
           - name: kaniko-secret
