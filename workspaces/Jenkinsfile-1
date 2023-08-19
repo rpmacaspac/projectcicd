@@ -3,16 +3,42 @@
 pipeline {
   agent {
     kubernetes {
-      defaultContainer 'jnlp'
-      yamlFile 'agent-pod.yaml'
-    }
+      yaml '''
+apiVersion: v1
+kind: Pod
+metadata:
+  name: kaniko
+  namespace: devops-tools
+spec:
+  containers:
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:latest
+    imagePullPolicy: Always
+    args:
+    - "--context=git://github.com/scriptcamp/kubernetes-kaniko"
+    - "--destination=rpmacaspac/kaniko-demo-image:1.2"
+    - "--cache=true"
+    volumeMounts:
+    - name: kaniko-secret
+      mountPath: /kaniko/.docker
+  restartPolicy: Never
+  volumes:
+  - name: kaniko-secret
+    secret:
+      secretName: regcred
+      items:
+        - key: .dockerconfigjson
+          path: config.json
+    '''
   }
 
 
   stages {
     stage("Test"){
         steps {
-          sh 'pwd && ls'
+            container('jnlp'){
+              sh 'pwd && ls'
+            }
         }
     }
   }
