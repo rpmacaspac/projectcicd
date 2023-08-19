@@ -8,8 +8,8 @@ spec:
     image: gcr.io/kaniko-project/executor:latest
     imagePullPolicy: Always
     command:
-    - /bin/sh
-    - cat
+    - "sleep"
+    - "3600"
     args:
     - "--context=git://github.com/scriptcamp/kubernetes-kaniko"
     - "--destination=rpmacaspac/kaniko-demo-image:1.2"
