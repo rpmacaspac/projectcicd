@@ -1,15 +1,7 @@
-
-
-pipeline {
-    agent {
-        docker { image 'woozymasta/kaniko-tool'}
-    }
-
-    stages {
-        stage('Test'){
-            steps {
-                sh 'docker --version'
-            }
+podTemplate {
+    node("jenkins-slave") {
+        stage('Run shell') {
+            sh 'echo hello world'
         }
     }
 }
