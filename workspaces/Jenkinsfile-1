@@ -12,7 +12,8 @@ metadata:
 spec:
   containers:
   - name: kaniko
-    image: gcr.io/kaniko-project/executor:latest
+    image: gcr.io/kaniko-project/executor:debug
+    command: ["sleep", "43200"]
     imagePullPolicy: Always
     args:
     - "--context=git://github.com/rpmacaspac/projectcicd"
@@ -42,9 +43,7 @@ spec:
         steps {
             container('jnlp'){
               sh 'pwd && ls'
-              sh 'cat /etc/*-release'
               echo "${BUILD}"
-
             }
         }
     }
