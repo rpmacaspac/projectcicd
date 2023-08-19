@@ -1,7 +1,9 @@
-podTemplate {
-    node("jenkins-slave") {
-        stage('Run shell') {
-            sh 'echo hello world'
-        }
+pipeline {
+  agent {
+    kubernetes {
+      customWorkspace '../agents'
+      yamlFile 'agent-pod.yaml'
     }
+  }
+
 }
