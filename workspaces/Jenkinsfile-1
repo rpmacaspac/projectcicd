@@ -16,7 +16,7 @@ pipeline {
           args:
           - "--context=git//github.com/rpmacaspac/projectcicd"
           - "--context-sub-path=workspaces"
-          - "--dockerfile=Dockerfile"
+          - "--dockerfile=~/workspaces/Dockerfile"
           - "--destination=rpmacaspac/devops-toolkit:1.1.0"
           volumeMounts:
           - name: kaniko-secret
