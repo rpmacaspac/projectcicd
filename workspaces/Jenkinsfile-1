@@ -27,7 +27,7 @@ spec:
   volumes:
   - name: kaniko-secret
     secret:
-      secretName: "${registry}"-"${project}"
+      secretName: harbor-projectcicd
       items:
         - key: .dockerconfigjson
           path: config.json
