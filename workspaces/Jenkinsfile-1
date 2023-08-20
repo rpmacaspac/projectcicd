@@ -39,7 +39,10 @@ spec:
         container("jnlp"){
           script {
             sh 'ls && pwd'
-            BUILD_NUMBER = sh ( 'cat "build_number.txt"' )
+            BUILD_VERSION = sh (
+                            script: "cat ${projectDir}/build_number.txt",
+                            returnStdout: true
+            ).trim()
           }
         }
       }
