@@ -14,10 +14,6 @@ spec:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
     imagePullPolicy: Always
-    args:
-    - "--context=git://github.com/rpmacaspac/projectcicd"
-    - "--destination=rpmacaspac/devops-toolkit:1.3"
-    - "--cache=true"
     volumeMounts:
     - name: kaniko-secret
       mountPath: /kaniko/.docker
@@ -34,18 +30,21 @@ spec:
   }
 
   environment {
-    BUILD = sh ( 'cat "build_number.txt"' )
+    BUILD_NUMBER = sh ( 'cat "build_number.txt"' )
   }
 
   stages {
-    stage("Test"){
-        steps {
+    stage("Build"){
             container(name: 'kaniko', shell: '/busybox/sh'){
-              sh 'pwd && ls'
-              echo "${BUILD}"
+              script {
+                sh '''
+                /kaniko/executor --dockerfile `pwd`/Dockerfile \
+                                  --context `pwd` \
+                                  --destination=rpmacaspac/devops-toolkit:${BUILD_NUMBER}"
+                  
+                  '''
+              }
             }
         }
+      }
     }
-  }
-
-}
