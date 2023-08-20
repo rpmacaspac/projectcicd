@@ -44,7 +44,7 @@ spec:
                 sh '''
                 /kaniko/executor --dockerfile `pwd`/Dockerfile \
                                   --context `pwd` \
-                                  --destination=rpmacaspac/devops-toolkit:${BUILD_NUMBER}"
+                                  --destination=rpmacaspac/devops-toolkit:${BUILD_NUMBER}
                   
                   '''
               }
