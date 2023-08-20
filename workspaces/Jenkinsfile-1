@@ -34,11 +34,10 @@ spec:
 
 
   stages {
-    stage("Set Params"){
+    stage("Set PARAMS"){
       steps {
         container("jnlp"){
           script {
-            sh 'ls && pwd'
             BUILD_NUMBER = sh (
               script: "cat build_number.txt",
               returnStdout: true
@@ -53,11 +52,14 @@ spec:
       steps {
           container(name: 'kaniko', shell: '/busybox/sh'){
             script {
-              sh """
-              /kaniko/executor --context . \
-                --destination "rpmacaspac/devops-toolkit:${BUILD_NUMBER}" \
-                --cache=true
-                """
+              withCredentials([file(credentialsId: 'docker-config', variable: 'regcred')]) {
+                sh 'cp $regcred /kaniko/.docker/config.json'
+
+                sh """/kaniko/executor --context . \
+                  --destination "rpmacaspac/devops-toolkit:${BUILD_NUMBER}" \
+                  --cache=true
+                  """
+              }
             }
           }
       }
