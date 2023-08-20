@@ -40,8 +40,8 @@ spec:
           script {
             sh 'ls && pwd'
             BUILD_NUMBER = sh (
-                            script: "cat ${projectDir}/build_number.txt",
-                            returnStdout: true
+              script: "cat build_number.txt",
+              returnStdout: true
             ).trim()
           }
         }
