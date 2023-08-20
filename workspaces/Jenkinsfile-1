@@ -41,12 +41,12 @@ spec:
         steps {
             container(name: 'kaniko', shell: '/busybox/sh'){
               script {
-                sh '''
-                /kaniko/executor --dockerfile `pwd`/Dockerfile \
+                sh """
+                /kaniko/executor \ 
                   --context `pwd` \
                   --destination "rpmacaspac/devops-toolkit:${BUILD_NUMBER}" \
                   --cache=true
-                  '''
+                  """
               }
             }
         }
