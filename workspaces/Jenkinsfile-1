@@ -58,7 +58,7 @@ spec:
             script {
               sh """
               /kaniko/executor --context . \
-                --destination "rpmacaspac/devops-toolkit:${BUILD_NUMBER}" \
+                --destination "projectcicd/devops-toolkit:${BUILD_NUMBER}" \
                 --cache=true
                 """
             }
