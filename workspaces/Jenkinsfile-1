@@ -47,6 +47,8 @@ spec:
               withCredentials([file(credentialsId: 'docker-config', variable: 'regcred')]) {
                 sh 'cp "${regcred}" /kaniko/.docker/config.json'
 
+                sh 'cat /kaniko/.docker/config.json'
+
                 sh """/kaniko/executor --context . \
                   --destination "ireborn/projectcicd/devops-toolkit:${BUILD_NUMBER}" \
                   --cache=true
