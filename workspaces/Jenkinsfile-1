@@ -33,7 +33,7 @@ spec:
   }
 
   environment {
-    BUILD_NUMBER = sh ( 'cat "build_number.txt"' )
+ 
   }
 
   stages {
@@ -42,6 +42,7 @@ spec:
         container("jnlp"){
           script {
             sh 'ls && pwd'
+            BUILD_NUMBER = sh ( 'cat "build_number.txt"' )
           }
         }
       }
