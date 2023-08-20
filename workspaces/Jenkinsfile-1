@@ -43,12 +43,12 @@ spec:
           container(name: 'kaniko', shell: '/busybox/sh'){
             script {
               sh 'ls /kaniko/.docker'
-              
+
               withCredentials([file(credentialsId: 'docker-config', variable: 'regcred')]) {
                 sh 'cp "${regcred}" /kaniko/.docker/config.json'
 
                 sh """/kaniko/executor --context . \
-                  --destination "projectcicd/devops-toolkit:${BUILD_NUMBER}" \
+                  --destination "ireborn/projectcicd/devops-toolkit:${BUILD_NUMBER}" \
                   --cache=true
                   """
               }
