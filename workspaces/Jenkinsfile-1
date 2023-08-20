@@ -34,7 +34,7 @@ spec:
 
 
   stages {
-    stage("Set PARAMS"){
+    stage("Set Parameters"){
       steps {
         container("jnlp"){
           script {
@@ -48,7 +48,7 @@ spec:
     }
 
 
-    stage("Build"){
+    stage("Build Image"){
       steps {
           container(name: 'kaniko', shell: '/busybox/sh'){
             script {
@@ -57,7 +57,7 @@ spec:
 
 
               withCredentials([file(credentialsId: 'docker-config', variable: 'regcred')]) {
-                sh 'cp $regcred /kaniko/.docker/config.json'
+                sh "cp $regcred /kaniko/.docker/config.json"
 
                 sh """/kaniko/executor --context . \
                   --destination "projectcicd/devops-toolkit:${BUILD_NUMBER}" \
