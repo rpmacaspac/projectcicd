@@ -17,17 +17,7 @@ spec:
     command:
       - cat
     tty: true
-    volumeMounts:
-    - name: kaniko-secret
-      mountPath: /kaniko/.docker
   restartPolicy: Never
-  volumes:
-  - name: kaniko-secret
-    secret:
-      secretName: regcred
-      items:
-        - key: .dockerconfigjson
-          path: config.json
     '''
     }
   }
