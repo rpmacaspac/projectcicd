@@ -32,9 +32,6 @@ spec:
     }
   }
 
-  environment {
- 
-  }
 
   stages {
     stage("Set Params"){
