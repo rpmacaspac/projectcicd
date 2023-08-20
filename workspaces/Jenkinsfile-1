@@ -52,11 +52,15 @@ spec:
       steps {
           container(name: 'kaniko', shell: '/busybox/sh'){
             script {
+              sh 'ls && pwd'
+              sh 'cat /kaniko/.docker/config.json'
+
+
               withCredentials([file(credentialsId: 'docker-config', variable: 'regcred')]) {
                 sh 'cp $regcred /kaniko/.docker/config.json'
 
                 sh """/kaniko/executor --context . \
-                  --destination "rpmacaspac/devops-toolkit:${BUILD_NUMBER}" \
+                  --destination "projectcicd/devops-toolkit:${BUILD_NUMBER}" \
                   --cache=true
                   """
               }
