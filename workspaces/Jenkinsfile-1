@@ -42,7 +42,7 @@ spec:
             container(name: 'kaniko', shell: '/busybox/sh'){
               script {
                 sh """
-                /kaniko/executor --context `pwd` \
+                /kaniko/executor --context . \
                   --destination "rpmacaspac/devops-toolkit:${BUILD_NUMBER}" \
                   --cache=true
                   """
