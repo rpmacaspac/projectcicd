@@ -37,18 +37,29 @@ spec:
   }
 
   stages {
-    stage("Build"){
-        steps {
-            container(name: 'kaniko', shell: '/busybox/sh'){
-              script {
-                sh """
-                /kaniko/executor --context . \
-                  --destination "rpmacaspac/devops-toolkit:${BUILD_NUMBER}" \
-                  --cache=true
-                  """
-              }
-            }
+    stage("Set Params"){
+      steps {
+        container("jnlp"){
+          script {
+            sh 'ls && pwd'
+          }
         }
+      }
+    }
+
+
+    stage("Build"){
+      steps {
+          container(name: 'kaniko', shell: '/busybox/sh'){
+            script {
+              sh """
+              /kaniko/executor --context . \
+                --destination "rpmacaspac/devops-toolkit:${BUILD_NUMBER}" \
+                --cache=true
+                """
+            }
+          }
+      }
     }
   }
 
