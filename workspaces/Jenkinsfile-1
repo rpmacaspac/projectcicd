@@ -41,7 +41,7 @@ spec:
               script: "cat build_number.txt",
               returnStdout: true
             ).trim()
-          sh 'ls /kaniko/.docker'
+
           }
         }
       }
@@ -52,6 +52,7 @@ spec:
       steps {
           container(name: 'kaniko', shell: '/busybox/sh'){
             script {
+              sh 'ls /kaniko/.docker'
               sh """
               /kaniko/executor --context . \
                 --destination "ireborn/projectcicd/devops-toolkit:${BUILD_NUMBER}" \
