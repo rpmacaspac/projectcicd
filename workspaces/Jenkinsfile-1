@@ -52,7 +52,7 @@ spec:
       steps {
           container(name: 'kaniko', shell: '/busybox/sh'){
             script {
-              sh 'ls /kaniko/.docker'
+              sh 'cat /kaniko/.docker'
               sh """
               /kaniko/executor --context . \
                 --destination "ireborn/projectcicd/devops-toolkit:${BUILD_NUMBER}" \
