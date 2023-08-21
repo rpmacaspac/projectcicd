@@ -44,6 +44,7 @@ spec:
               script: "cat build_number.txt",
               returnStdout: true
             ).trim()
+            sh 'docker ps'
           }
         }
       }
