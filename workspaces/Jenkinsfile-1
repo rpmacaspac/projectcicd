@@ -54,7 +54,7 @@ spec:
       steps {
           container(name: 'kaniko', shell: '/busybox/sh'){
             script {
-              sh 'doker login -u admin ireborn -p Harbor12345'
+              sh 'docker login -u admin ireborn -p Harbor12345'
               sh """
               /kaniko/executor --context . \
                 --destination "rpmacaspac/devops-toolkit:${BUILD_NUMBER}" \
