@@ -44,7 +44,6 @@ spec:
               script: "cat build_number.txt",
               returnStdout: true
             ).trim()
-            sh 'docker ps'
           }
         }
       }
@@ -55,7 +54,6 @@ spec:
       steps {
           container(name: 'kaniko', shell: '/busybox/sh'){
             script {
-              sh 'docker login -u admin ireborn -p Harbor12345'
               sh """
               /kaniko/executor --context . \
                 --destination "ireborn/projectcicd/devops-toolkit:${BUILD_NUMBER}" \
