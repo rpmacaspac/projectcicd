@@ -26,9 +26,6 @@ spec:
   - name: kaniko-secret
     secret:
       secretName: harbor-projectcicd
-      items:
-        - key: .dockerconfigjson
-          path: config.json
     '''
     }
   }
@@ -44,6 +41,7 @@ spec:
               script: "cat build_number.txt",
               returnStdout: true
             ).trim()
+          sh 'ls /kaniko/.docker'
           }
         }
       }
