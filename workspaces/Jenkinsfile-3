@@ -36,15 +36,17 @@ pipeline {
     stages {
         stage('Build and Push') {
             steps {
-                script {
-                    def harborCredentials = credentials("${env.harborlogin}")
+                container(name: 'kaniko', shell: '/busybox/sh'){
+                    script {
+                        def harborCredentials = credentials("${env.harborlogin}")
 
-                    sh """
-                        /kaniko/executor --context . \
-                        --dockerfile workspaces/Dockerfile \
-                        --destination \${REGISTRY_URL}/\${REPO_NAME}:\${IMAGE_TAG} \
-                        --skip-tls-verify \
-                    """
+                        sh """
+                            /kaniko/executor --context . \
+                            --dockerfile workspaces/Dockerfile \
+                            --destination \${REGISTRY_URL}/\${REPO_NAME}:\${IMAGE_TAG} \
+                            --skip-tls-verify \
+                        """
+                    }
                 }
             }
         }
