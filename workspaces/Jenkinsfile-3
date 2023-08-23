@@ -21,7 +21,7 @@ pipeline {
                 restartPolicy: Never
                 volumes:
                 - name: kaniko-secret
-                    secret:
+                  secret:
                     secretName: kaniko-secret
                 '''
     }
