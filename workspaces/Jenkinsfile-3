@@ -42,7 +42,6 @@ pipeline {
 
                         sh """
                         /kaniko/executor --context . \
-                            --dockerfile workspaces/Dockerfile \
                             --destination \${REGISTRY_URL}/\${REPO_NAME}:\${IMAGE_TAG} \
                             --skip-tls-verify \
                         """
