@@ -41,12 +41,10 @@ pipeline {
 
                     sh """
                         /kaniko/executor \
-                        --context \$WORKSPACE \
-                        --dockerfile \$WORKSPACE/Dockerfile \
+                        --context . \
+                        --dockerfile workspaces/Dockerfile \
                         --destination \${REGISTRY_URL}/\${REPO_NAME}:\${IMAGE_TAG} \
                         --skip-tls-verify \
-                        --username ${harborCredentials.username} \
-                        --password ${harborCredentials.password}
                     """
                 }
             }
