@@ -1,0 +1,55 @@
+pipeline {
+    agent {
+        kubernetes {
+         yaml '''
+            apiVersion: v1
+            kind: Pod
+            metadata:
+            name: kaniko
+            namespace: devops-tools
+            spec:
+            containers:
+            - name: kaniko
+                image: gcr.io/kaniko-project/executor:debug
+                imagePullPolicy: Always
+                command:
+                - cat
+                tty: true
+                volumeMounts:
+                - name: kaniko-secret
+                mountPath: /kaniko/.docker
+            restartPolicy: Never
+            volumes:
+            - name: kaniko-secret
+                secret:
+                secretName: kaniko-secret
+                '''
+    }
+  }
+
+    environment {
+        REGISTRY_URL = 'ireborn'
+        REPO_NAME = 'projectcicd/test'
+        IMAGE_TAG = 'latest'
+    }
+
+    stages {
+        stage('Build and Push') {
+            steps {
+                script {
+                    def harborCredentials = credentials('harborlogin')
+
+                    sh """
+                        /kaniko/executor \
+                        --context \$WORKSPACE \
+                        --dockerfile \$WORKSPACE/Dockerfile \
+                        --destination \${REGISTRY_URL}/\${REPO_NAME}:\${IMAGE_TAG} \
+                        --skip-tls-verify \
+                        --username ${harborCredentials.username} \
+                        --password ${harborCredentials.password}
+                    """
+                }
+            }
+        }
+    }
+}
