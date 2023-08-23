@@ -37,7 +37,7 @@ pipeline {
         stage('Build and Push') {
             steps {
                 script {
-                    def harborCredentials = credentials('harborlogin')
+                    def harborCredentials = credentials("${env.harborlogin}")
 
                     sh """
                         /kaniko/executor \
