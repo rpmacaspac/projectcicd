@@ -28,7 +28,7 @@ pipeline {
   }
 
     environment {
-        REGISTRY_URL = 'ireborn'
+        REGISTRY_URL = 'ireborn:443'
         REPO_NAME = 'projectcicd/test'
         IMAGE_TAG = 'latest'
     }
