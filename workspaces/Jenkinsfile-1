@@ -23,7 +23,7 @@ spec:
       mountPath: /kaniko/.docker
   restartPolicy: Never
   volumes:
-  - name: kaniko-secret
+  - name: regcred
     secret:
       secretName: kaniko-secret
     '''
@@ -55,7 +55,7 @@ spec:
               sh 'ls /kaniko/.docker/'
               sh """
               /kaniko/executor --context . \
-                --destination "ireborn:443/projectcicd/devops-toolkit:${BUILD_NUMBER}" \
+                --destination "rpmacaspac/devops-toolkit:${BUILD_NUMBER}" \
                 --cache=true
                 """
             }
