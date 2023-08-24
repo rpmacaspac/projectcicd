@@ -20,7 +20,7 @@ spec:
       - name: myserver
         image: rpmacaspac/projectcicd:latest
         ports:
-        - containerPort: 3000
+        - containerPort: 80
         
         
 ---
@@ -32,9 +32,9 @@ metadata:
 spec:
   selector:
     app: myapp 
-  type: LoadBalancer
+  type: NodePort
   ports:
   - protocol: TCP
-    port: 5000
-    targetPort: 3000
+    port: 80
+    targetPort: 80
     nodePort: 31110
