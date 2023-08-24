@@ -23,7 +23,7 @@ spec:
     - name: kaniko-secret
       mountPath: /kaniko/.docker    
   - name: helmo
-    image: alpine/helm:3.11.1
+    image: bitnami/kubectl
     command:
       - cat
     tty: true
@@ -75,7 +75,7 @@ spec:
           container(name: 'helmo'){
             script {
               dir("workspaces"){
-                withKubeConfig([credentialsId: 'mykubeconfiig', serverUrl: 'https://10.0.0.10:6443']) {
+                withKubeConfig([credentialsId: 'mykubeconfig', serverUrl: 'https://10.0.0.10:6443']) {
                   sh 'kubectl apply -f deploymentservice.yml'
                 }
               }
