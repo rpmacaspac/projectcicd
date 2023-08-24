@@ -11,10 +11,16 @@ metadata:
   name: kaniko
   namespace: devops-tools
 spec:
+  serviceAccountName: jenkins-admin
   containers:
   - name: kaniko
     image: gcr.io/kaniko-project/executor:debug
     imagePullPolicy: Always
+    command:
+      - cat
+    tty: true
+  - name: helmo
+    image: alpine:helm
     command:
       - cat
     tty: true
@@ -58,6 +64,18 @@ spec:
               /kaniko/executor --context . \
                 --destination "rpmacaspac/devops-toolkit:${BUILD_NUMBER}" \
                 --cache=true
+                """
+            }
+          }
+      }
+    }
+
+    stage("Build"){
+      steps {
+          container(name: 'helmo'){
+            script {
+              sh """
+              helm version
                 """
             }
           }

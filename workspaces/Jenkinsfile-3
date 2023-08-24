@@ -8,6 +8,7 @@ pipeline {
                 name: kaniko
                 namespace: devops-tools
             spec:
+                serviceAccountName: jenkins-admin
                 containers:
                 - name: kaniko
                   image: gcr.io/kaniko-project/executor:debug
