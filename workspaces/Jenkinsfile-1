@@ -77,6 +77,7 @@ spec:
               dir("workspaces"){
                 withKubeConfig([credentialsId: 'mykubeconfiig', serverUrl: 'https://10.0.0.10:6443']) {
                   sh 'kubectl apply -f deploymentservice.yml'
+                }
               }
             }
           }
