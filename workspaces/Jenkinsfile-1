@@ -19,14 +19,14 @@ spec:
     command:
       - cat
     tty: true
+    volumeMounts:
+    - name: kaniko-secret
+      mountPath: /kaniko/.docker    
   - name: helmo
     image: alpine/helm:3.11.1
     command:
       - cat
     tty: true
-    volumeMounts:
-    - name: kaniko-secret
-      mountPath: /kaniko/.docker
   restartPolicy: Never
   volumes:
   - name: kaniko-secret
