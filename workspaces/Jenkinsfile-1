@@ -23,9 +23,9 @@ spec:
       mountPath: /kaniko/.docker
   restartPolicy: Never
   volumes:
-  - name: regcred
+  - name: kaniko-secret
     secret:
-      secretName: kaniko-secret
+      secretName: secret
     '''
     }
   }
