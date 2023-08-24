@@ -70,7 +70,7 @@ spec:
       }
     }
 
-    stage("Build"){
+    stage("Deploy"){
       steps {
           container(name: 'helmo'){
             script {
@@ -81,6 +81,7 @@ spec:
           }
       }
     }
+
   }
 
 }
