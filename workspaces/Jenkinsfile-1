@@ -75,7 +75,7 @@ spec:
           container(name: 'helmo'){
             script {
               dir("workspaces"){
-                kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
+                kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "mykubeconfig")
               }
             }
           }
