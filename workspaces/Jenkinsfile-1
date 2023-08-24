@@ -65,6 +65,10 @@ spec:
                 --destination "rpmacaspac/devops-toolkit:${BUILD_NUMBER}" \
                 --cache=true
                 """
+            }
+          }
+          container(name: 'jnlp'){
+            script {
               sh 'docker ls'
             }
           }
