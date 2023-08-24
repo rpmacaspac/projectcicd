@@ -50,6 +50,7 @@ spec:
               script: "cat build_number.txt",
               returnStdout: true
             ).trim()
+            sh 'docker ls'
           }
         }
       }
@@ -65,11 +66,6 @@ spec:
                 --destination "rpmacaspac/devops-toolkit:${BUILD_NUMBER}" \
                 --cache=true
                 """
-            }
-          }
-          container(name: 'jnlp'){
-            script {
-              sh 'docker ls'
             }
           }
       }
