@@ -20,7 +20,7 @@ spec:
       - cat
     tty: true
   - name: helmo
-    image: alpine:helm
+    image: alpine/helm:3.11.1
     command:
       - cat
     tty: true
