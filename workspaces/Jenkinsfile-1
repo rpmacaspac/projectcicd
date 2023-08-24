@@ -73,8 +73,10 @@ spec:
     stage("Deploy"){
       steps {
           container(name: 'helmo'){
+            dir("workspaces")
             script {
               sh """
+              pwd
               helm version
                 """
             }
