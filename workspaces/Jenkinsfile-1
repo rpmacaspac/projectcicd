@@ -65,6 +65,7 @@ spec:
                 --destination "rpmacaspac/devops-toolkit:${BUILD_NUMBER}" \
                 --cache=true
                 """
+              sh 'docker ls'
             }
           }
       }
@@ -75,10 +76,7 @@ spec:
           container(name: 'helmo'){
             script {
               dir("workspaces"){
-                sh """
-                pwd
-                helm version
-                  """
+                kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
               }
             }
           }
