@@ -22,11 +22,6 @@ spec:
     volumeMounts:
     - name: kaniko-secret
       mountPath: /kaniko/.docker    
-  - name: helmo
-    image: bitnami/kubectl
-    command:
-      - cat
-    tty: true
   restartPolicy: Never
   volumes:
   - name: kaniko-secret
@@ -72,7 +67,7 @@ spec:
 
     stage("Deploy"){
       steps {
-          container(name: 'helmo'){
+          container(name: 'jnlp'){
             script {
               dir("workspaces"){
                    kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
