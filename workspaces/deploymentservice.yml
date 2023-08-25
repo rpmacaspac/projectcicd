@@ -18,8 +18,7 @@ spec:
     spec:
       containers:
       - name: myserver
-        image: rpmacaspac/projectcicd:latest
-        ports:
+        image: rpmacaspac/devops-toolkit:3.0
         - containerPort: 80
         
         
