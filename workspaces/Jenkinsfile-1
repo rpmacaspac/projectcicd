@@ -55,11 +55,13 @@ spec:
       steps {
           container(name: 'kaniko', shell: '/busybox/sh'){
             script {
-              sh """
-              /kaniko/executor --context . \
-                --destination "rpmacaspac/devops-toolkit:${BUILD_NUMBER}" \
-                --cache=true
-                """
+              dir('workspaces'){
+                sh """
+                /kaniko/executor --context . \
+                  --destination "rpmacaspac/devops-toolkit:${BUILD_NUMBER}" \
+                  --cache=true
+                  """                
+              }
             }
           }
       }
