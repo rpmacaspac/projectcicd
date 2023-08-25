@@ -75,9 +75,7 @@ spec:
           container(name: 'helmo'){
             script {
               dir("workspaces"){
-                withKubeConfig([credentialsId: 'mykubeconfig', serverUrl: 'https://10.0.0.10:6443']) {
-                  sh 'kubectl version'
-                  sh 'kubectl cluster-info'
+                   kubernetesDeploy(configs: "deploymentservice.yml", kubeconfigId: "kubernetes")
                 }
               }
             }
@@ -85,6 +83,4 @@ spec:
       }
     }
 
-  }
-
-}
+ }
