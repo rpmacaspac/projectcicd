@@ -29,6 +29,20 @@ This project will run jenkins pipeline that will create workloads for simple app
 * Helm to install kubernetes workload
 
 
+### BASIC IMPLEMENTATION
+
+Jenkins(WSL) -> Kubernetes Cluster(Vagrant) -> Workload(local cluster)
+
+![pipeline01](https://github.com/rpmacaspac/projectcicd/assets/15140570/9950ea02-dcf7-45b4-b319-eec08f465a46)
+
+![web app html](https://github.com/rpmacaspac/projectcicd/assets/15140570/3781cf1c-e51c-4667-8c38-2839c9a0911b)
 
 
+
+
+
+
+
+
+### FUTURE IMPLEMENTATION AND SETUP
 ![pipeline design](https://github.com/rpmacaspac/projectcicd/assets/15140570/8cf58352-ca0c-4b7b-976d-2e8b2f95c30c)
