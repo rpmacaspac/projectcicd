@@ -10,7 +10,7 @@ pipeline {
             steps {
                 container('dind-container') {
                   script {
-                    sh 'ls && pwd'
+                    // sh 'ls && pwd'
                     BUILD_NUMBER = sh (
                       script: "cat build_number.txt",
                       returnStdout: true
