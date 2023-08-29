@@ -6,13 +6,37 @@ pipeline {
         }
     }
     stages {
-        stage('Build') {
+        stage('Set Params') {
             steps {
                 container('dind-container') {
-                    sh 'docker version'
-                    sh 'docker image ls'
+                  script {
+                    sh 'ls && pwd'
+                    def BUILD_NUMBER = sh (
+                      script: "cat build_number.txt",
+                      returnStdout: true
+                    ).trim()
+
+                  }
                 }
             }
         }
+
+    stage("Build"){
+      steps {
+          container('dind-container'){
+            script {
+              dir('workspaces'){
+                def imageName = 'myapp'
+
+
+                sh "docker build -t ${imageName}:${BUILD_NUMBER} ."
+                sh "docker tag ${imageName}:${BUILD_NUMBER} ${imageName}:latest"              
+              }
+            }
+          }
+      }
+    }
+
+
     }
 }
