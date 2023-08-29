@@ -1,7 +1,7 @@
 pipeline {
     agent {
         kubernetes {
-            label 'dind-agent'
+            inheritFrom 'dind-agent'
             defaultContainer 'dind-container'
         }
     }
