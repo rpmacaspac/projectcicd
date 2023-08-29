@@ -1,9 +1,18 @@
 pipeline {
-  agent {
-    kubernetes {
-      customWorkspace '../agents'
-      yamlFile 'agent-pod.yaml'
+    agent {
+        kubernetes {
+            label 'dind-agent'
+            defaultContainer 'dind-container'
+        }
     }
-  }
-
+    stages {
+        stage('Build') {
+            steps {
+                container('dind-container') {
+                    sh 'docker version'
+                    sh 'docker info'
+                }
+            }
+        }
+    }
 }
