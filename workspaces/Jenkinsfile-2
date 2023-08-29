@@ -11,7 +11,7 @@ pipeline {
                 container('dind-container') {
                   script {
                     sh 'ls && pwd'
-                    def BUILD_NUMBER = sh (
+                    BUILD_NUMBER = sh (
                       script: "cat build_number.txt",
                       returnStdout: true
                     ).trim()
