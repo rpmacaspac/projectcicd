@@ -5,7 +5,7 @@ This project will run jenkins pipeline that will create workloads for simple app
 
 # Device Specification
 * Processor	Intel(R) Core(TM) i7-7700 CPU @ 3.60GHz   3.60 GHz
-* Installed RAM	16.0 GB (15.9 GB usable)
+* Installed RAM	32.0 GB (31.9 GB usable)
 * System type	64-bit operating system, x64-based processor
 
 # Vagrant Resource Specification
